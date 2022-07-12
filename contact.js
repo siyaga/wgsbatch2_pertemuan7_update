@@ -146,11 +146,11 @@ const updateContact = (namef,name,mobile,email)=> {
      console.log(`${namef} sudah di ubah menjadi ${name}`);
     }
   }
-  
+
   if(contact.mobile === mobile || mobile === null || mobile === undefined || mobile === ''){
      updateMobile = contact.mobile;
   } else if(contact.name !== mobile ){
-    //Validasi format nomor
+    //Validasi format Nomor
     if(!validator.isMobilePhone(mobile, 'id-ID')){
       console.log("Nomor Telephone Yang anda Masukan Salah!!, Pastikan Format nomor sesuai.");
       return false;
@@ -164,7 +164,8 @@ const updateContact = (namef,name,mobile,email)=> {
   if(contact.email === email || email === null || email === undefined || mobile === ''){
      updateEmail = contact.email;
   } else if(contact.email !== email )
-  //Validasi format Email
+  {
+    //Validasi format Email
     if(!validator.isEmail(email)){
       console.log("Email yang anda Masukan Salah!, Pastikan Format email sesuai.");
       return false;
