@@ -143,7 +143,6 @@ const updateContact = (namef,name,mobile,email)=> {
 
   
      updateName = name;
-     console.log(`${namef} sudah di ubah menjadi ${name}`);
     }
   }
 
@@ -157,7 +156,6 @@ const updateContact = (namef,name,mobile,email)=> {
     
     }else{
       updateMobile = mobile;
-      console.log(`${contact.mobile} sudah di ubah menjadi ${mobile}`);
     }
   }
 
@@ -171,18 +169,10 @@ const updateContact = (namef,name,mobile,email)=> {
       return false;
     }else {
       updateEmail = email;
-      console.log(`${contact.email} sudah di ubah menjadi ${email}`);
     }
   }
 
-  //Menambahkan validasi untuk nomor telephone
-  if(!validator.isMobilePhone(mobile, 'id-ID')){
-    console.log("Nomor Telephone Yang anda Masukan Salah!!, Pastikan Format nomor sesuai.");
-    return false;
-  
-  }
-  //Menambahkan validasi untuk email
-  
+
 
   
 
