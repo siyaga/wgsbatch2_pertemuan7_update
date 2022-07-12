@@ -125,22 +125,54 @@ const updateContact = (namef,name,mobile,email)=> {
     return false;
   }
   let updateName, updateMobile, updateEmail;
+
   // Validasi untuk menemukan data
-  if(contact.name === name){
+  if(contact.name === name || name === undefined || name === null || name === ''){
      updateName = contact.name;
-  } else if(contact.name !== name){
+  } else if(contact.name !== name ){
      updateName = name;
+     console.log(`${namef} sudah di ubah menjadi ${name}`);
   }
-  if(contact.mobile === mobile){
+
+  if(contact.mobile === mobile || mobile === null || mobile === undefined || mobile === ''){
      updateMobile = contact.mobile;
-  } else if(contact.name !== mobile){
+  } else if(contact.name !== mobile ){
+    
      updateMobile = mobile;
+     console.log(`${contact.mobile} sudah di ubah menjadi ${mobile}`);
   }
-  if(contact.email === email){
+
+  if(contact.email === email || email === null || email === undefined || mobile === ''){
      updateEmail = contact.email;
-  } else if(contact.email !== email){
+  } else if(contact.email !== email ){
      updateEmail = email;
+     console.log(`${contact.email} sudah di ubah menjadi ${email}`);
   }
+
+  
+
+
+  const dataUpdate = {
+    name : updateName,
+    mobile : updateMobile,
+    email : updateEmail,
+
+  }
+  
+
+
+  // deleteContact(namef);
+  const newContact = contacts.filter((contact)=>contact.name.toLowerCase() !== namef.toLowerCase());
+  fs.writeFileSync('data/contacts.json', JSON.stringify(newContact));
+  
+
+  newContact.push(dataUpdate);
+  console.log(dataUpdate);
+  fs.writeFileSync('data/contacts.json', JSON.stringify(newContact));
+  // saveIsiData(dataUpdate.name, dataUpdate.mobile, dataUpdate.email);
+  // untuk mengclear console log di atas
+  process.stdout.write('\033c');
+  console.log(`${namef} data updated`);
 
   
 
