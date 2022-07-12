@@ -118,36 +118,70 @@ const updateContact = (namef,name,mobile,email)=> {
   const contacts = loadContact();
   const contact = contacts.find((contact)=>contact.name.toLowerCase() === namef.toLowerCase());
 
-
-  //Melakukan validasi jika nama tidak di temukan
+//Melakukan validasi jika nama tidak di temukan
   if(!contact){
-    console.log(`${name} tidak ada`);
+    console.log(`${namef} tidak ada`);
     return false;
   }
+  
+
+   
+  
   let updateName, updateMobile, updateEmail;
 
   // Validasi untuk menemukan data
   if(contact.name === name || name === undefined || name === null || name === ''){
      updateName = contact.name;
   } else if(contact.name !== name ){
+    //Menampilkan jika nilai true bila sama namanya maka munculkan nama sudah digunakan
+    const namaDuplikat = contacts.find((contact) => contact.name.toLowerCase() === name.toLowerCase());
+    if(namaDuplikat){
+      
+      //agar error berhenti disini
+      return  console.log("Nama sudah digunakan, silakan ganti nama lain");
+  }else {
+
+  
      updateName = name;
      console.log(`${namef} sudah di ubah menjadi ${name}`);
+    }
   }
-
+  
   if(contact.mobile === mobile || mobile === null || mobile === undefined || mobile === ''){
      updateMobile = contact.mobile;
   } else if(contact.name !== mobile ){
+    //Validasi format nomor
+    if(!validator.isMobilePhone(mobile, 'id-ID')){
+      console.log("Nomor Telephone Yang anda Masukan Salah!!, Pastikan Format nomor sesuai.");
+      return false;
     
-     updateMobile = mobile;
-     console.log(`${contact.mobile} sudah di ubah menjadi ${mobile}`);
+    }else{
+      updateMobile = mobile;
+      console.log(`${contact.mobile} sudah di ubah menjadi ${mobile}`);
+    }
   }
 
   if(contact.email === email || email === null || email === undefined || mobile === ''){
      updateEmail = contact.email;
-  } else if(contact.email !== email ){
-     updateEmail = email;
-     console.log(`${contact.email} sudah di ubah menjadi ${email}`);
+  } else if(contact.email !== email )
+  //Validasi format Email
+    if(!validator.isEmail(email)){
+      console.log("Email yang anda Masukan Salah!, Pastikan Format email sesuai.");
+      return false;
+    }else {
+      updateEmail = email;
+      console.log(`${contact.email} sudah di ubah menjadi ${email}`);
+    }
   }
+
+  //Menambahkan validasi untuk nomor telephone
+  if(!validator.isMobilePhone(mobile, 'id-ID')){
+    console.log("Nomor Telephone Yang anda Masukan Salah!!, Pastikan Format nomor sesuai.");
+    return false;
+  
+  }
+  //Menambahkan validasi untuk email
+  
 
   
 
